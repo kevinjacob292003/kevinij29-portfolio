@@ -87,6 +87,8 @@ html[data-theme='dark'] .switch-track i { transform: translateX(13px); backgroun
 .eyebrow { display: flex; align-items: center; gap: 9px; margin-bottom: 24px; }
 .eyebrow-line { width: 23px; height: 1px; background: var(--accent); }
 .eyebrow-divider { color: var(--muted-2); }
+.eyebrow-role, .eyebrow-role-secondary { white-space: nowrap; }
+.eyebrow-role-secondary { display: inline-flex; align-items: center; gap: 9px; }
 h1, h2, h3, p { margin-top: 0; }
 h1, h2, h3 { font-family: var(--font-display); }
 h1 { margin-bottom: 22px; font-size: clamp(62px, 7.6vw, 100px); font-weight: 600; letter-spacing: -.085em; line-height: .91; }
@@ -120,16 +122,18 @@ html[data-theme='dark'] .button-primary { color: #102344; }
   from { transform: translate(-50%, -50%) rotate(var(--orbit-angle)); }
   to { transform: translate(-50%, -50%) rotate(calc(var(--orbit-angle) + 360deg)); }
 }
-.monogram-card { position: relative; display: flex; align-items: center; justify-content: center; width: 178px; height: 178px; gap: 0; border: 1px solid var(--line-strong); border-radius: 50%; background: color-mix(in srgb, var(--surface) 84%, transparent); box-shadow: var(--shadow); color: var(--ink); font-family: var(--font-display); font-size: 85px; font-weight: 500; letter-spacing: -.13em; }
+.monogram-card { position: absolute; z-index: 1; top: 50%; left: clamp(14px, 6.5%, 30px); display: flex; align-items: center; justify-content: center; width: clamp(82px, 33%, 148px); aspect-ratio: 1; gap: 0; transform: translateY(-50%); border: 1px solid var(--line-strong); border-radius: 50%; background: color-mix(in srgb, var(--surface) 84%, transparent); box-shadow: var(--shadow); color: var(--ink); font-family: var(--font-display); font-size: clamp(48px, 6vw, 74px); font-weight: 500; letter-spacing: -.13em; }
+.hero-portrait { position: absolute; z-index: 1; top: 50%; right: clamp(18px, 7%, 32px); display: flex; align-items: center; justify-content: center; width: clamp(112px, 37%, 158px); margin: 0; padding: 6px; transform: translateY(-50%); border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); box-shadow: var(--shadow); }
+.hero-portrait img { display: block; width: auto; height: auto; max-width: 100%; max-height: 250px; object-fit: contain; object-position: center; border-radius: 3px; }
 .monogram-card::before { position: absolute; inset: 11px; border: 1px dashed var(--line-strong); border-radius: 50%; content: ''; }
 .monogram-card > span:first-child { transform: translateX(-4px); }
 .monogram-card > span:last-child { color: var(--accent-strong); transform: translateX(5px); }
 .monogram-slash { position: absolute; z-index: 1; width: 85px; height: 3px; border-radius: 3px; background: var(--accent); transform: rotate(-47deg) translateY(4px); }
 .art-coordinate { position: absolute; z-index: 1; color: var(--muted); font-family: var(--font-display); font-size: 9px; font-weight: 700; letter-spacing: .17em; }
 .coord-top { top: 21px; left: 22px; }
-.coord-bottom { right: 22px; bottom: 20px; color: var(--accent-strong); }
+.coord-bottom { top: 21px; right: 22px; color: var(--accent-strong); }
 .art-side-note { position: absolute; top: 50%; right: 14px; color: var(--muted-2); font-family: var(--font-display); font-size: 8px; letter-spacing: .19em; line-height: 1.6; writing-mode: vertical-rl; transform: translateY(-50%); }
-.hero-card-note { position: absolute; right: 30px; bottom: 62px; display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 9px; line-height: 1.5; box-shadow: 0 5px 22px rgba(0,0,0,.06); }
+.hero-card-note { position: absolute; z-index: 2; bottom: 22px; left: 50%; display: flex; align-items: center; gap: 10px; padding: 9px 12px; transform: translateX(-50%); border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 9px; line-height: 1.5; box-shadow: 0 5px 22px rgba(0,0,0,.06); }
 .note-number { color: var(--accent-strong); font-family: var(--font-display); font-size: 12px; font-weight: 700; }
 .hero-footnote { position: absolute; right: 0; bottom: 32px; left: 0; display: flex; align-items: center; gap: 14px; color: var(--muted-2); font-size: 8px; font-weight: 700; letter-spacing: .18em; }
 .scroll-rule { display: block; width: 45px; height: 1px; background: var(--line-strong); }
@@ -253,7 +257,7 @@ html.js .reveal.is-visible { opacity: 1; transform: translateY(0); }
 }
 
 @media (min-width: 1500px) {
-  .page-shell { margin-left: max(246px, calc((100vw - 1440px) / 2 + 246px)); }
+  .page-shell { width: min(calc(100% - max(246px, calc((100vw - 1440px) / 2 + 246px))), calc(var(--content-width) + 150px)); margin-left: max(246px, calc((100vw - 1440px) / 2 + 246px)); }
   .rail { left: max(0px, calc((100vw - 1440px) / 2)); }
 }
 @media (max-width: 1180px) {
@@ -301,8 +305,8 @@ html.js .reveal.is-visible { opacity: 1; transform: translateY(0); }
   h1 sup { margin-left: 6px; }
   .hero-lede { max-width: 380px; font-size: 20px; }
   .hero-summary { font-size: 12px; }
-  .hero-art { min-height: 280px; }
-  .monogram-card { width: 140px; height: 140px; font-size: 69px; }
+  .hero-art { min-height: 320px; }
+  .monogram-card { width: clamp(82px, 33%, 118px); font-size: clamp(48px, 12vw, 58px); }
   .art-orbit { width: 230px; height: 230px; }
   .orbit-two { width: 280px; height: 140px; }
   .electron-orbit-one { width: 280px; height: 140px; }
@@ -364,9 +368,12 @@ html.js .reveal.is-visible { opacity: 1; transform: translateY(0); }
   .contact-links a { padding-top: 13px; padding-bottom: 13px; }
   .contact-links i { top: 21px; }
   .site-footer { flex-wrap: wrap; padding-top: 19px; font-size: 8px; }
-  .site-footer > span { order: 3; width: 100%; }
-}
+  }
 
+@media (max-width: 360px) {
+  .eyebrow { gap: 6px; font-size: 8px; letter-spacing: .11em; }
+  .eyebrow-line { width: 18px; }
+}
 
 /* Samridhy ERP — source-verified QA case study */
 .project-card-samridhy { align-items: start; }
